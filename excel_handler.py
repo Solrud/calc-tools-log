@@ -64,7 +64,7 @@ class ExcelHandler:
                 current_razdel = row[9].value
                 current_type_instrument = row[10].value
 
-                if row[0].value != None and type(row[0].value) is int and iter < 100:
+                if row[0].value != None and type(row[0].value) is int:
 
                     if current_uid == lst_uid:
                         pass

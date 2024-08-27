@@ -1,5 +1,5 @@
-TOOLS_LOG_PATH = 'C:/Users/ilin-mi/Desktop/Копия ToolsLog.xlsx'
-SVOD_EXCEL_PATH = 'C:/Users/ilin-mi/Desktop/Копия SvodExcel.xlsx'
-OUTPUT_PATH = 'C:/Users/ilin-mi/Desktop/'
+TOOLS_LOG_PATH = 'O:/ASTP_RAB/GARMONIJ/Voronova/aips/TEXT/ToolsLog.xlsx'
+SVOD_EXCEL_PATH = 'O:/ASTP_RAB/GARMONIJ/Voronova/aips/TEXT/SvodExcel.xlsx'
+OUTPUT_PATH = ''
 OUTPUT_FILE_NAME = 'Тест обработки'
 OUTPUT_FILE_TYPE = '.xlsx'
