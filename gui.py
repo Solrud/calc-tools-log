@@ -13,18 +13,30 @@ class GUI:
         self.output_path = OUTPUT_PATH
         self.file_name = OUTPUT_FILE_NAME
 
-
         self.draw_widgets()
         self.define_window_options()
+
+    @staticmethod
+    def show_info_messagebox(label, text):
+        messagebox.showinfo(label, text)
+
+    @staticmethod
+    def show_error_messagebox(label, text):
+        messagebox.showerror(label, text)
+
+    @staticmethod
+    def show_warning_messagebox(label, text):
+        messagebox.showwarning(label, text)
+
 
     def define_window_options(self):
         self.window.title('Обработчик ToolsLog/Svod')
         self.window.geometry('570x335')
 
-        self.write_path_to(self.tools_log_file, self.file_tools_log_input)
-        self.write_path_to(self.svod_excel_file, self.file_svod_excel_input)
-        self.write_path_to(self.output_path, self.to_choose_ouput_path_input)
-        self.write_path_to(self.file_name, self.file_name_txt, False)
+        self.write_path_in_input_text(self.tools_log_file, self.file_tools_log_input)
+        self.write_path_in_input_text(self.svod_excel_file, self.file_svod_excel_input)
+        self.write_path_in_input_text(self.output_path, self.to_choose_ouput_path_input)
+        self.write_path_in_input_text(self.file_name, self.file_name_txt, False)
 
     def draw_widgets(self):
         # Выбор ToolsLog Excel
@@ -70,20 +82,19 @@ class GUI:
     def select_file_tools_log_file(self): # Метод выбора ToolsLog.xlsx
         self.tools_log_file = filedialog.askopenfilename(title='Выберите ToolsLog.xlsx',
                                                          filetypes=[("Excel файлы", "*.xlsx *.xls")])
-        self.write_path_to(self.tools_log_file, self.file_tools_log_input)
+        self.write_path_in_input_text(self.tools_log_file, self.file_tools_log_input)
 
     def select_file_svod_excel_file(self): # Метод выбора SvodExcel.xlsx
         self.svod_excel_file = filedialog.askopenfilename(title='Выберите SvodExcel.xlsx',
                                                          filetypes=[("Excel файлы", "*.xlsx *.xls")])
-        self.write_path_to(self.svod_excel_file, self.file_svod_excel_input)
-
+        self.write_path_in_input_text(self.svod_excel_file, self.file_svod_excel_input)
 
     def select_output_path(self):
         self.output_path = filedialog.askdirectory(title='Выберите путь вывода нового файла')
         self.output_path = self.output_path + '/' if self.output_path and self.output_path[-1] != '/' else self.output_path
-        self.write_path_to(self.output_path, self.to_choose_ouput_path_input)
+        self.write_path_in_input_text(self.output_path, self.to_choose_ouput_path_input)
 
-    def write_path_to(self, file_path, text_file_path, disable=True):
+    def write_path_in_input_text(self, file_path, text_file_path, disable=True):
         text_file_path.configure(state='normal')
         text_file_path.delete(1.0, tk.END)
         text_file_path.insert("end", file_path)
@@ -91,29 +102,18 @@ class GUI:
             text_file_path.configure(state='disabled')
 
 
-
-
-
     def define_command_handler_files_btn(self):
-        # print(self.output_path, self.tools_log_file, self.svod_excel_file)
-        if (self.tools_log_file and self.svod_excel_file and self.output_path):
-            # messagebox.showinfo('Успех!','Программа приступила к выполнению')
-            self.wait_info_txt.configure(text='Идёт обработка, подождите...')
-            self.to_handle_files_btn.configure(state='disabled')
+        file_name_txt = self.file_name_txt.get(1.0, tk.END).strip()
+        if self.tools_log_file.strip() and self.svod_excel_file.strip() and self.output_path.strip() and file_name_txt.strip():
+            self.wait_info_txt.configure(text='Идёт обработка, подождите... \nПримерно 1мин. 22 сек.')
+            self.to_handle_files_btn.configure(bg='#ffc4c4',state='disabled')
             self.wait_info_txt.update()
             self.to_handle_files_btn.update()
 
-            self.excel_handler.handler(self.tools_log_file, self.svod_excel_file, self.output_path, self.file_name_txt.get(1.0, tk.END).strip())
+            self.excel_handler.init_values(self.tools_log_file, self.svod_excel_file, self.output_path, file_name_txt)
+            self.excel_handler.handler()
 
-            self.to_handle_files_btn.configure(state='normal')
+            self.to_handle_files_btn.configure(bg="#b7fa84", state='normal')
             self.wait_info_txt.configure(text='')
         else:
             messagebox.showerror('Ошибка!','Одно из полей не заполнено')
-
-    @staticmethod
-    def show_info_messagebox(label, text):
-        messagebox.showinfo(label, text)
-
-    @staticmethod
-    def show_error_messagebox(label, text):
-        messagebox.showerror(label, text)
