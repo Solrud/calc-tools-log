@@ -237,8 +237,9 @@ class ExcelHandler:
             GUI.show_info_messagebox('Успех', f'Файл создан по пути: {self.output_full_path}. ' +
                                      f'\nВремя выполнения: {code_work_time_parse}')
         else:
-            GUI.show_error_messagebox('Ошибка', 'Файл не создался по выбранному пути')
             self.logger.log_error(f'Не удалось создать файл по пути: {self.output_full_path}.')
+            GUI.show_error_messagebox('Ошибка', 'Файл не создался по выбранному пути')
+
 
 
 
