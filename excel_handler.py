@@ -138,17 +138,17 @@ class ExcelHandler:
                             row_svod_by_uid = self.ws_svod_dict_uid.get(lst_uid)
                             if row_svod_by_uid:
                                 obozn = row_svod_by_uid[1]
-                                naim = row_svod_by_uid[2]
-                                proizv = row_svod_by_uid[3]
-                                dop_param = row_svod_by_uid[4]
-                                ost_irk_20_1 = row_svod_by_uid[6]
-                                ost_irk_21_1 = row_svod_by_uid[8]
-                                ost_irk_22_1 = row_svod_by_uid[10]
-                                ost_irk_23_1 = row_svod_by_uid[12]
-                                ost_irk_20_2 = row_svod_by_uid[14]
-                                ost_irk_23_2 = row_svod_by_uid[16]
-                                stelazh = row_svod_by_uid[18]
-                                yacheika = row_svod_by_uid[19]
+                                naim = row_svod_by_uid[1]
+                                proizv = row_svod_by_uid[2]
+                                dop_param = row_svod_by_uid[3]
+                                ost_irk_20_1 = row_svod_by_uid[9]
+                                ost_irk_21_1 = row_svod_by_uid[11]
+                                ost_irk_22_1 = row_svod_by_uid[13]
+                                ost_irk_23_1 = row_svod_by_uid[15]
+                                ost_irk_20_2 = row_svod_by_uid[17]
+                                ost_irk_23_2 = row_svod_by_uid[19]
+                                stelazh = '-'
+                                yacheika = '-'
 
                             push_row = [lst_uid, razdel, type_instrument, obozn, naim, proizv, dop_param,
                                         ost_irk_20_1, ost_irk_21_1, ost_irk_22_1, ost_irk_23_1, ost_irk_20_2,
